@@ -1,9 +1,9 @@
 <?php
     $data = file_get_contents('save.html');
     
-    $tempString = substr($data, -10, 5);
+    $tempString = substr($data, -7, 5);
     $temp = floatval($tempString);
-    $time = substr($data, -19, 8);
+    $time = substr($data, -16, 8);
 
 ?><!DOCTYPE html>
 <html lang="en">
