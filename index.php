@@ -22,7 +22,16 @@
         </header>
 
         <main class="px-3">
-            <h1 class="">Hot</h1>
+            <?php if ($temp > 80): ?>
+                <h1 class="">Hot</h1>
+            <?php elseif ($temp >= 70 && $temp <= 80): ?>
+                <h1 class="">Drinkable</h1>
+            <?php elseif ($temp <= 40): ?>
+                <h1 class="">Cold</h1>
+            <?php else: ?>
+                <h1 class="">Warm</h1>
+            <?php endif; ?>
+
             <?php if ($temp == 0): ?>
                     <p class="badge bg-danger">Drink Monitor Not Active</p>
                 <?php else: ?>
