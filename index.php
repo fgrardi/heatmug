@@ -29,13 +29,17 @@
                 <?php else: ?>
                     <p class="badge bg-success">Drink Monitor Active</p>
             <?php endif; ?>
-            
-            <p class="lead">
-                <span class="">Your drink is getting cold!</span> 
-                The current temperature of your mug is now
-                <span class="fw-bold"><?php echo $temp; ?>°C</span>. The temperature was last updated on 
-                <span class=""><?php echo $time; ?></span>
-            </p>
+
+            <?php if ($temp == 0): ?> 
+                The current temperature could not be read. Please check if your mug is placed on the coaster correctly.
+            <?php else: ?>
+                <p class="lead">
+                    <span class="">Your drink is getting cold!</span>The current temperature of your mug is now
+                    <span class="fw-bold"><?php echo $temp; ?></span>. The temperature was last updated on 
+                    <span class=""><?php echo $time; ?></span>
+                </p>
+            <?php endif; ?>
+
             <div class="form-check form-switch d-flex justify-content-center">
                 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
                 <span class="material-symbols-outlined ps-2">notifications</span>
