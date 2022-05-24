@@ -5,7 +5,6 @@
     $temp = floatval($tempString);
     $time = substr($data, -19, 8);
 
-
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,15 +29,15 @@
                     <p class="badge bg-success">Drink Monitor Active</p>
             <?php endif; ?>
 
-            <?php if ($temp == 0): ?> 
-                The current temperature could not be read. Please check if your mug is placed on the coaster correctly.
-            <?php else: ?>
-                <p class="lead">
+            <p class="lead">
+                <?php if ($temp == 0): ?> 
+                    <span>The current temperature could not be read. Please check if your mug is placed on the coaster correctly.</span>
+                <?php else: ?>
                     <span class="">Your drink is getting cold!</span>The current temperature of your mug is now
                     <span class="fw-bold"><?php echo $temp; ?></span>. The temperature was last updated on 
                     <span class=""><?php echo $time; ?></span>
-                </p>
-            <?php endif; ?>
+                <?php endif; ?>
+            </p>
 
             <div class="form-check form-switch d-flex justify-content-center">
                 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
