@@ -1,7 +1,11 @@
 <?php
-    $time = time();
-    $temp = $_POST['temp'];
-    $btnState = $_POST['isPressed'];
+    $data = file_get_contents('save.html');
+    
+    $tempString = substr($data, -10, 5);
+    $temp = floatval($tempString);
+    $time = substr($data, -19, 8);
+
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,16 +24,16 @@
 
         <main class="px-3">
             <h1 class="">Hot</h1>
-            <?php if ($btnState === "LOW"): ?>
-                <p class="badge bg-success">Drink Monitor Active</p>
-            <?php else: ?>
-                <p class="badge bg-danger">Drink Monitor Not Active</p>
+            <?php if ($temp == 0): ?>
+                    <p class="badge bg-danger">Drink Monitor Not Active</p>
+                <?php else: ?>
+                    <p class="badge bg-success">Drink Monitor Active</p>
             <?php endif; ?>
             
             <p class="lead">
                 <span class="">Your drink is getting cold!</span> 
                 The current temperature of your mug is now
-                <span class="fw-bold"><?php echo $temp; ?></span>. The temperature was last updated on 
+                <span class="fw-bold"><?php echo $temp; ?>°C</span>. The temperature was last updated on 
                 <span class=""><?php echo $time; ?></span>
             </p>
             <div class="form-check form-switch d-flex justify-content-center">
