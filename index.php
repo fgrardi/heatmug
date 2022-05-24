@@ -1,5 +1,7 @@
 <?php
-
+    $time = time();
+    $temp = $_POST['temp'];
+    $btnState = $_POST['isPressed'];
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,13 +20,17 @@
 
         <main class="px-3">
             <h1 class="">Hot</h1>
-            <p class="badge bg-success">Drink Monitor Activated</p>
+            <?php if ($btnState === "LOW"): ?>
+                <p class="badge bg-success">Drink Monitor Active</p>
+            <?php else: ?>
+                <p class="badge bg-danger">Drink Monitor Not Active</p>
+            <?php endif; ?>
             
             <p class="lead">
                 <span class="">Your drink is getting cold!</span> 
                 The current temperature of your mug is now
-                <span class="">75°</span>. The temperature was last updated on 
-                <span class="">11:45:33</span>
+                <span class="fw-bold"><?php echo $temp; ?></span>. The temperature was last updated on 
+                <span class=""><?php echo $time; ?></span>
             </p>
             <div class="form-check form-switch d-flex justify-content-center">
                 <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
@@ -33,8 +39,8 @@
         </main>
 
         <footer class="mt-auto text-white-50">
-            <p>Smart Technology project by <a href="https://getbootstrap.com/" class="text-white text-decoration-none">Ellen de Veth</a>, and <a
-                    href="https://twitter.com/mdo" class="text-white text-decoration-none">Fien Gérardi</a>.</p>
+            <p>Smart Technology project by <a href="https://github.com/ellendeveth" class="text-white text-decoration-none">Ellen de Veth</a>, and <a
+                    href="https://github.com/fgrardi" class="text-white text-decoration-none">Fien Gérardi</a>.</p>
         </footer>
     </div>
 
