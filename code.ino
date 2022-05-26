@@ -6,6 +6,8 @@
 const char* ssid = "Studentenhuis MDC";   // your network SSID (name)
 const char* password = "tmc2016dc";       // your network password (use for WPA, or use as key for WEP) 
 const char* host = "heatmug.be";          // your server name
+const char* hostPb = "api.pushingbox.com" // host of the pushingbox server for Pushbullet notifications
+const char* devid = "vAA3C2607B8B1BCA";   // key required for Pushbullet notifications through pushingbox
 int port = 80;
 
 WiFiClient wifi;
@@ -151,6 +153,7 @@ void postRequestWhenPressed() {
   String postData = "temp=" + String(temperature); // Put data in String var
 
   client.post("/save.php", contentType, postData); // Post request
+  pushNotification(); // Push notification to Pushbullet
 
   // Read the status code and body of the response
   int statusCode = client.responseStatusCode();
@@ -176,4 +179,37 @@ void postRequestWhenNotPressed() {
   String response = client.responseBody();
   Serial.print("Response: ");
   Serial.println(response);
+}
+
+// Function to push a notification with Pushbullet
+void pushNotification(){
+    WiFiClient client;
+    const int httpPort = 80;
+    if (!client.connect(hostPb, httpPort)) {  // If server couldn't be reached
+        Serial.println("Connection failed");
+        return;
+    }
+
+    // We now create a URI for the request
+    String url = "/pushingbox";
+    url += "?devid=";
+    url += devid;
+    
+    Serial.print("Requesting URL: ");
+    Serial.println(url);
+
+    // This will send the request to the server
+    client.print(String("GET ") + url + " HTTP/1.1\r\n" +
+                 "Host: " + host + "\r\n" +
+                 "Connection: close\r\n\r\n");
+
+    unsigned long timeout = millis();
+
+    while (client.available() == 0) {   // Server sends no response 
+        if (millis() - timeout > 5000) {
+            Serial.println("Client Timeout!");
+            client.stop();
+            return;
+        }
+    }
 }
