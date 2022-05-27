@@ -141,6 +141,13 @@ void loop() {
     } else {
       Serial.println(" lights)");
     }
+
+    if(temperature == 80) {
+      pushNotification(); // Push notification to Pushbullet when temperature is 80°
+    } else if(temperature == 60) {
+      pushNotification(); // Push notification to Pushbullet when temperature is 60°
+    }
+    
     postRequestWhenPressed(); // Post to http server with temperature data
   } 
   delay(200);
@@ -153,7 +160,6 @@ void postRequestWhenPressed() {
   String postData = "temp=" + String(temperature); // Put data in String var
 
   client.post("/save.php", contentType, postData); // Post request
-  pushNotification(); // Push notification to Pushbullet
 
   // Read the status code and body of the response
   int statusCode = client.responseStatusCode();
