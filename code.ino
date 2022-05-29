@@ -142,9 +142,9 @@ void loop() {
       Serial.println(" lights)");
     }
 
-    if(temperature == 80) {
+    if(temperature >= 76 && temperature <= 84) {
       pushNotification(); // Push notification to Pushbullet when temperature is 80°
-    } else if(temperature == 60) {
+    } else if(temperature >= 56 && temperature <= 64) {
       pushNotification(); // Push notification to Pushbullet when temperature is 60°
     }
     
